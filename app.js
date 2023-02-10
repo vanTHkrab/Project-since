@@ -1,14 +1,14 @@
-const express = require('express');
+const express = require('express')
 const app =express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const open = require('open');
 const chokidar = require('chokidar');
 const fs = require('fs');
-const { JSDOM } = jsdom;
-
+const { JSDOM } = require('jsdom');
+ 
 const watcher = chokidar.watch('./carousel', {
-    ignoreInitial: ture
+    ignoreInitial: true
 })
 
 io.on('connection', socket =>{
@@ -39,7 +39,7 @@ app.get('/*', (req,res) => {
             res.send(dom.serialize())
         })
     } else {
-        res.sendFile(__dirname + '/carousel'+ releaseEvents.url)
+        res.sendFile(__dirname + '/carousel'+ req.url)
     }
 })
 
